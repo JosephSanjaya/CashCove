@@ -1,0 +1,13 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+/discord.xml
+/gradle.xml
+/graphql-settings.xml
+/misc.xml
+/migrations.xml
+/kotlinc.xml
+/vcs.xml
+/appInsightsSettings.xml
+/compiler.xml
+/deploymentTargetSelector.xml
