@@ -1,7 +1,7 @@
 plugins {
-    id("com.cashcove.conventions.app")
-    id("com.cashcove.conventions.compose")
-    alias(libs.plugins.kotlin.serialization)
+    alias(sjy.plugins.buildlogic.app)
+    alias(sjy.plugins.buildlogic.compose)
+    alias(sjy.plugins.buildlogic.detekt)
 }
 
 android {

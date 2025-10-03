@@ -1,5 +1,5 @@
 pluginManagement {
-    includeBuild("conventions")
+    includeBuild("sjy-build-logic")
     repositories {
         google {
             content {
@@ -17,6 +17,11 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+    }
+    versionCatalogs {
+        create("sjy") {
+            from(files("sjy-build-logic/gradle/libs.versions.toml"))
+        }
     }
 }
 

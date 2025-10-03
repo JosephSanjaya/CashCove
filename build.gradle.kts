@@ -1,13 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.compose.compiler) apply false
-    alias(libs.plugins.jetbrains.kotlin.android) apply false
-    alias(libs.plugins.ksp) apply false
-    alias(libs.plugins.hilt) apply false
-    alias(libs.plugins.detekt) apply true
-    id("com.cashcove.conventions.detekt") apply true
+    alias(sjy.plugins.android.application) apply false
+    alias(sjy.plugins.android.library) apply false
+    alias(sjy.plugins.kotlin.android) apply false
+    alias(sjy.plugins.kotlin.compose) apply false
+    alias(sjy.plugins.kotlin.serialization) apply false
+    alias(sjy.plugins.ksp) apply false
+    alias(sjy.plugins.detekt) apply true
+    alias(sjy.plugins.ktorfit) apply false
+    alias(sjy.plugins.gms.services) apply false
+    alias(sjy.plugins.crashlytics) apply false
+    alias(sjy.plugins.lumo) apply false
+    alias(sjy.plugins.buildlogic.detekt) apply true
 }
 
 group = "com.cashcove.app"
