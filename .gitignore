@@ -14,3 +14,6 @@
 .cxx
 local.properties
 /.kotlin/
+/.idea/AndroidProjectSystem.xml
+/.idea/runConfigurations.xml
+/.idea/inspectionProfiles/Project_Default.xml
