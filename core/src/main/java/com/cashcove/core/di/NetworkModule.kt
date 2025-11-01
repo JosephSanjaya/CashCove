@@ -1,8 +1,8 @@
 package com.cashcove.core.di
 //
-//@Module
-//@InstallIn(SingletonComponent::class)
-//object NetworkModule {
+// @Module
+// @InstallIn(SingletonComponent::class)
+// object NetworkModule {
 //    @Provides
 //    @Singleton
 //    fun provideHttpLoggingInterceptor(networkLoggingInterceptor: NetworkLoggingInterceptor): HttpLoggingInterceptor =
@@ -46,4 +46,4 @@ package com.cashcove.core.di
 //    @Provides
 //    @Singleton
 //    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
-//}
+// }

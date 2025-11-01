@@ -1,4 +1,4 @@
-package com.cashcove.app.ui.theme
+package com.cashcove.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
