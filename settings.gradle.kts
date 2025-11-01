@@ -24,4 +24,4 @@ dependencyResolutionManagement {
 rootProject.name = "Cash Cove"
 include(":app")
 include(":core")
-include(":features")
+include(":features:authentication")
