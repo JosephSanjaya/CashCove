@@ -34,4 +34,5 @@ android {
 
 dependencies {
     coreLibraryDesugaring(libs.androidx.desugar)
+    implementation(project(":core"))
 }

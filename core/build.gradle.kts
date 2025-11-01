@@ -1,17 +1,13 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    alias(sjy.plugins.buildlogic.lib)
+    alias(sjy.plugins.buildlogic.compose)
+    alias(sjy.plugins.buildlogic.detekt)
 }
 
 android {
     namespace = "com.cashcove.core"
-    compileSdk {
-        version = release(36)
-    }
 
     defaultConfig {
-        minSdk = 24
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
