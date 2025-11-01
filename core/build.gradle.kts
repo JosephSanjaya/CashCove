@@ -25,4 +25,6 @@ android {
 
 dependencies {
     coreLibraryDesugaring(libs.androidx.desugar)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 }

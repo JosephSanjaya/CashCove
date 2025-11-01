@@ -8,9 +8,12 @@ jvm-target = "21"
 desugar = "2.1.5"
 agp = "8.13.0"
 kotlin = "2.2.20"
+retrofit = "3.0.0"
 
 [libraries]
 androidx-desugar = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 
 [bundles]
 [plugins]
