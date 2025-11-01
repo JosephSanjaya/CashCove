@@ -1,10 +1,8 @@
 package com.cashcove.core.di
 
-import android.content.Context
-
-//@Module
-//@InstallIn(SingletonComponent::class)
-//object DatabaseModule {
+// @Module
+// @InstallIn(SingletonComponent::class)
+// object DatabaseModule {
 //    @Provides
 //    @Singleton
 //    fun provideDatabase(
@@ -19,4 +17,4 @@ import android.content.Context
 //
 //    @Provides
 //    fun provideParticipantsDao(database: AppDatabase): ParticipantsDao = database.participantsDao()
-//}
+// }
