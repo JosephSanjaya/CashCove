@@ -2,6 +2,7 @@ plugins {
     alias(sjy.plugins.buildlogic.lib)
     alias(sjy.plugins.buildlogic.compose)
     alias(sjy.plugins.buildlogic.detekt)
+    alias(sjy.plugins.ksp)
 }
 
 android {
@@ -27,4 +28,7 @@ dependencies {
     coreLibraryDesugaring(libs.androidx.desugar)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    implementation(libs.store)
+    implementation(libs.bundles.room)
+    ksp(libs.room.compiler)
 }
