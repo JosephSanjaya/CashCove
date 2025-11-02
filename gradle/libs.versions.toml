@@ -3,11 +3,8 @@
 min-sdk = "24"
 target-sdk = "36"
 compile-sdk = "36"
-jvm-target = "21"
 
 desugar = "2.1.5"
-agp = "8.13.0"
-kotlin = "2.2.20"
 retrofit = "3.0.0"
 
 [libraries]
