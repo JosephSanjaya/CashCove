@@ -1,20 +1,21 @@
 package com.cashcove.core.di
 
-// @Module
-// @InstallIn(SingletonComponent::class)
-// object DatabaseModule {
-//    @Provides
-//    @Singleton
-//    fun provideDatabase(
-//        @ApplicationContext context: Context,
-//    ): AppDatabase =
-//        Room
-//            .databaseBuilder(context, AppDatabase::class.java, AppDatabase.Companion.DB_NAME)
-//            .build()
-//
-//    @Provides
-//    fun provideExpenseDao(database: AppDatabase): ExpenseDao = database.expenseDao()
-//
-//    @Provides
-//    fun provideParticipantsDao(database: AppDatabase): ParticipantsDao = database.participantsDao()
-// }
+import android.content.Context
+import androidx.room.Room
+import com.cashcove.core.common.AppConstants
+import com.cashcove.core.database.CashCoveDatabase
+import org.koin.core.annotation.Module
+import org.koin.core.annotation.Single
+
+@Module
+object DatabaseModule {
+    @Single
+    fun provideDatabase(context: Context): CashCoveDatabase =
+        Room.databaseBuilder(
+            context,
+            CashCoveDatabase::class.java,
+            AppConstants.Database.DATABASE_NAME
+        )
+            .fallbackToDestructiveMigration(true)
+            .build()
+}

@@ -6,11 +6,24 @@ compile-sdk = "36"
 
 desugar = "2.1.5"
 retrofit = "3.0.0"
+store = "5.1.0-alpha07"
+room = "2.7.0"
+ksp = "2.3.0"
 
 [libraries]
 androidx-desugar = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+store = { module = "org.mobilenativefoundation.store:store5", version.ref = "store" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 
 [bundles]
+room = [
+    "room-runtime",
+    "room-ktx"
+]
+
 [plugins]
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
