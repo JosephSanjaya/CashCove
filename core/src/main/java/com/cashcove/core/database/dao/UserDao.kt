@@ -16,7 +16,7 @@ interface UserDao : BaseDao<UserEntity> {
     fun getAllUsers(): Flow<List<UserEntity>>
 
     @Query("SELECT * FROM users WHERE phoneNumber = :phoneNumber")
-    suspend fun getUserByEmail(phoneNumber: String): UserEntity?
+    suspend fun getUserByPhoneNumber(phoneNumber: String): UserEntity?
 
     // Custom delete methods
     @Query("DELETE FROM users WHERE id = :id")
