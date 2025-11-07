@@ -30,5 +30,6 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.store)
     implementation(libs.bundles.room)
+    implementation(libs.bundles.datastore)
     ksp(libs.room.compiler)
 }
