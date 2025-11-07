@@ -28,6 +28,7 @@ dependencies {
     coreLibraryDesugaring(libs.androidx.desugar)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    implementation(libs.okhttp.logging)
     implementation(libs.store)
     implementation(libs.bundles.room)
     implementation(libs.bundles.datastore)
