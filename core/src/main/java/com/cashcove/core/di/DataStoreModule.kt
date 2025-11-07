@@ -21,7 +21,7 @@ object DataStoreModule {
     ): DataStore<Preferences> {
         return PreferenceDataStoreFactory.create(
             produceFile = {
-                context.preferencesDataStoreFile("user_prefs")
+                context.preferencesDataStoreFile(AppConstants.DataStore.USER_PREFERENCES_NAME)
             }
         )
     }
