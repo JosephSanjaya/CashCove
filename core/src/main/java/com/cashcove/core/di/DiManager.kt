@@ -13,7 +13,7 @@ object DiManager {
                 LoggerModule.module,
                 NetworkModule.module,
                 DatabaseModule.module,
-
+                DataStoreModule.module,
             )
         }
     }
