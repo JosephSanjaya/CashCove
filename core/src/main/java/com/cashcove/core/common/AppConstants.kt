@@ -17,11 +17,16 @@ object AppConstants {
         const val AUTH_PREFERENCES_NAME = "auth_preferences"
     }
 
+    object DataStore {
+        const val USER_PREFERENCES_NAME = "user_prefs"
+    }
+
     object Times {
-        const val GENERAL_REQUEST_TIMEOUT = 30 * ONE_SECOND_MILLIS
-        const val REQUEST_READ_TIMEOUT = 30 * GENERAL_REQUEST_TIMEOUT
-        const val REQUEST_WRITE_TIMEOUT = 30 * GENERAL_REQUEST_TIMEOUT
-        const val LOGIN_REQUEST_TIMEOUT = 20 * ONE_SECOND_MILLIS
+        // Timeout values in seconds (used with TimeUnit.SECONDS)
+        const val GENERAL_REQUEST_TIMEOUT = 30L
+        const val REQUEST_READ_TIMEOUT = 30L
+        const val REQUEST_WRITE_TIMEOUT = 30L
+        const val LOGIN_REQUEST_TIMEOUT = 20L
     }
 
     object RegexPatterns {
