@@ -18,7 +18,7 @@ fun NavGraph(
         composable(route = Screen.Splash.route) {
             SplashScreen(
                 onNavigateToLogin = {
-                    navController.navigate(Screen.Login.route) {
+                    navController.navigate(Screen.Authentication.route) {
                         popUpTo(Screen.Splash.route) { inclusive = true }
                     }
                 },
@@ -35,7 +35,7 @@ fun NavGraph(
             )
         }
 
-        composable(route = Screen.Login.route) {
+        composable(route = Screen.Authentication.route) {
             // TODO: Add LoginScreen when created
             // LoginScreen()
         }
