@@ -38,17 +38,13 @@ class SplashViewModel(
                         isFirstLaunch = isFirstLaunch
                     )
                 }
-
-                // Navigate based on state
                 when {
                     isFirstLaunch -> postSideEffect(SplashSideEffect.NavigateToOnboarding)
-                    authPreferences.isLoggedIn -> postSideEffect(SplashSideEffect.NavigateToMain)
-                    else -> postSideEffect(SplashSideEffect.NavigateToLogin)
+                    else -> postSideEffect(SplashSideEffect.NavigateToAuthentication)
                 }
             } catch (e: Exception) {
                 updateState { copy(isLoading = false) }
-                // On error, navigate to login as fallback
-                postSideEffect(SplashSideEffect.NavigateToLogin)
+                postSideEffect(SplashSideEffect.NavigateToAuthentication)
             }
         }
     }

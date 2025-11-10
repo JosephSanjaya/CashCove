@@ -27,7 +27,7 @@ fun SplashScreen(
     LaunchedEffect(Unit) {
         viewModel.sideEffect.collect { sideEffect ->
             when (sideEffect) {
-                is SplashSideEffect.NavigateToLogin -> onNavigateToLogin()
+                is SplashSideEffect.NavigateToAuthentication -> onNavigateToLogin()
                 is SplashSideEffect.NavigateToMain -> onNavigateToMain()
                 is SplashSideEffect.NavigateToOnboarding -> onNavigateToOnboarding()
             }
