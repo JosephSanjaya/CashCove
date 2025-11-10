@@ -20,6 +20,7 @@ class UserPreferencesManager(
     companion object {
         private val DARK_MODE_KEY = booleanPreferencesKey("dark_mode")
         private val USERNAME_KEY = stringPreferencesKey("username")
+        private val IS_FIRST_LAUNCH_KEY = booleanPreferencesKey("is_first_launch")
     }
 
     fun getUserPreferences(): Flow<UserPreferences> {
@@ -56,6 +57,18 @@ class UserPreferencesManager(
     suspend fun clearUserPreferences() {
         dataStore.edit { preferences ->
             preferences.clear()
+        }
+    }
+
+    fun isFirstLaunch(): Flow<Boolean> {
+        return dataStore.data.map { preferences ->
+            preferences[IS_FIRST_LAUNCH_KEY] ?: true
+        }
+    }
+
+    suspend fun setFirstLaunchCompleted() {
+        dataStore.edit { preferences ->
+            preferences[IS_FIRST_LAUNCH_KEY] = false
         }
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.cashcove.core.common.AppConstants
 import com.cashcove.core.database.CashCoveDatabase
+import com.cashcove.core.database.dao.UserDao
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
@@ -18,4 +19,9 @@ object DatabaseModule {
         )
             .fallbackToDestructiveMigration(true)
             .build()
+
+    @Single
+    fun provideUserDao(database: CashCoveDatabase): UserDao {
+        return database.userDao()
+    }
 }

@@ -10,8 +10,8 @@ import com.cashcove.core.network.interceptor.LogInterceptor
 import com.cashcove.core.network.util.ConnectivityChecker
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.cashcove.core.network.api.ApiService
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 import retrofit2.Retrofit
@@ -80,5 +80,12 @@ object NetworkModule {
         context: Context
     ): ConnectivityChecker {
         return ConnectivityChecker(context)
+    }
+
+    @Single
+    fun provideApiService(
+        retrofit: Retrofit
+    ): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 }
