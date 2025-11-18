@@ -19,4 +19,3 @@ sealed class NetworkError : Exception() {
     object NoInternetConnection : NetworkError()
     object Timeout : NetworkError()
 }
-

@@ -10,14 +10,14 @@ import kotlinx.coroutines.launch
 class SplashViewModel(
     private val authPreferencesManager: AuthPreferencesManager,
     private val userPreferencesManager: UserPreferencesManager
-) : BaseViewModel<SplashState, SplashSideEffect>(
+) : BaseViewModel<SplashState, SplashIntent, SplashSideEffect>(
     initialState = SplashState()
 ) {
     init {
         checkAuthStatus()
     }
 
-    fun onIntent(intent: SplashIntent) {
+    override fun onIntent(intent: SplashIntent) {
         when (intent) {
             is SplashIntent.CheckAuthStatus -> checkAuthStatus()
         }
@@ -38,10 +38,7 @@ class SplashViewModel(
                         isFirstLaunch = isFirstLaunch
                     )
                 }
-                when {
-                    isFirstLaunch -> postSideEffect(SplashSideEffect.NavigateToOnboarding)
-                    else -> postSideEffect(SplashSideEffect.NavigateToAuthentication)
-                }
+                postSideEffect(SplashSideEffect.NavigateToAuthentication)
             } catch (e: Exception) {
                 updateState { copy(isLoading = false) }
                 postSideEffect(SplashSideEffect.NavigateToAuthentication)

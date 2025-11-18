@@ -18,18 +18,16 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun SplashScreen(
     viewModel: SplashViewModel = koinViewModel(),
-    onNavigateToLogin: () -> Unit = {},
+    onNavigateToAuthentication: () -> Unit = {},
     onNavigateToMain: () -> Unit = {},
-    onNavigateToOnboarding: () -> Unit = {}
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
         viewModel.sideEffect.collect { sideEffect ->
             when (sideEffect) {
-                is SplashSideEffect.NavigateToAuthentication -> onNavigateToLogin()
+                is SplashSideEffect.NavigateToAuthentication -> onNavigateToAuthentication()
                 is SplashSideEffect.NavigateToMain -> onNavigateToMain()
-                is SplashSideEffect.NavigateToOnboarding -> onNavigateToOnboarding()
             }
         }
     }
