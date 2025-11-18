@@ -13,7 +13,7 @@ abstract class BaseApiService(
     protected val connectivityChecker: ConnectivityChecker,
     protected val logger: Logger
 ) {
-    
+
     /**
      * Execute a network call with error handling and connectivity checking
      */
@@ -26,7 +26,7 @@ abstract class BaseApiService(
                 logger.w("BaseApiService", "No internet connection available")
                 return Result.failure(NetworkError.NoInternetConnection)
             }
-            
+
             val result = call()
             Result.success(result)
         } catch (e: Exception) {
@@ -35,4 +35,3 @@ abstract class BaseApiService(
         }
     }
 }
-

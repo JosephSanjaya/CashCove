@@ -8,4 +8,3 @@ sealed class ApiResponse<out T> {
     data class Error(val error: com.cashcove.core.network.error.NetworkError) : ApiResponse<Nothing>()
     object Loading : ApiResponse<Nothing>()
 }
-

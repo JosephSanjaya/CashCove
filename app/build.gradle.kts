@@ -36,6 +36,7 @@ android {
 dependencies {
     coreLibraryDesugaring(libs.androidx.desugar)
     implementation(project(":core"))
+    implementation(project(":features:authentication"))
     implementation(libs.bundles.room)
     ksp(libs.room.compiler)
 }

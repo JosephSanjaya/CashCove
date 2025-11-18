@@ -1,5 +1,6 @@
 plugins {
     alias(sjy.plugins.buildlogic.lib)
+    alias(sjy.plugins.buildlogic.compose)
     alias(sjy.plugins.buildlogic.detekt)
 }
 
@@ -25,4 +26,6 @@ android {
 dependencies {
     coreLibraryDesugaring(libs.androidx.desugar)
     implementation(project(":core"))
+    coreLibraryDesugaring(libs.androidx.foundation)
+    implementation(libs.androidx.material3)
 }

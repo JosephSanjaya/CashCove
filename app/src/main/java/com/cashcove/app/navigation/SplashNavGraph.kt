@@ -5,9 +5,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.cashcove.app.splash.SplashScreen
-
+import com.cashcove.features.authentication.data.navigation.AuthenticationNavGraph
 @Composable
-fun NavGraph(
+fun SplashNavGraph(
     navController: NavHostController,
     startDestination: String = Screen.Splash.route
 ) {
@@ -17,7 +17,7 @@ fun NavGraph(
     ) {
         composable(route = Screen.Splash.route) {
             SplashScreen(
-                onNavigateToLogin = {
+                onNavigateToAuthentication = {
                     navController.navigate(Screen.Authentication.route) {
                         popUpTo(Screen.Splash.route) { inclusive = true }
                     }
@@ -27,27 +27,16 @@ fun NavGraph(
                         popUpTo(Screen.Splash.route) { inclusive = true }
                     }
                 },
-                onNavigateToOnboarding = {
-                    navController.navigate(Screen.Onboarding.route) {
-                        popUpTo(Screen.Splash.route) { inclusive = true }
-                    }
-                }
             )
         }
 
         composable(route = Screen.Authentication.route) {
-            // TODO: Add LoginScreen when created
-            // LoginScreen()
+            AuthenticationNavGraph(navController)
         }
 
         composable(route = Screen.Main.route) {
             // TODO: Add MainScreen when created
             // MainScreen()
-        }
-
-        composable(route = Screen.Onboarding.route) {
-            // TODO: Add OnboardingScreen when created
-            // OnboardingScreen()
         }
     }
 }

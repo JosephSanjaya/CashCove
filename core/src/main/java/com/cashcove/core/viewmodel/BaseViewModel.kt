@@ -12,10 +12,10 @@ import kotlinx.coroutines.launch
 /**
  * Base ViewModel class that provides common functionality for all ViewModels.
  * Extend this class to create feature-specific ViewModels.
- * 
+ *
  * @param initialState The initial state for this ViewModel
  */
-abstract class BaseViewModel<State, SideEffect>(
+abstract class BaseViewModel<State, Intent, SideEffect>(
     initialState: State
 ) : ViewModel() {
 
@@ -45,4 +45,6 @@ abstract class BaseViewModel<State, SideEffect>(
      * Get current state
      */
     protected fun currentState(): State = _state.value
+
+    protected abstract fun onIntent(intent: Intent)
 }
