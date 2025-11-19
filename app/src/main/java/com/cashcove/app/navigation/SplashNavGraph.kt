@@ -9,32 +9,32 @@ import com.cashcove.features.authentication.data.navigation.AuthenticationNavGra
 @Composable
 fun SplashNavGraph(
     navController: NavHostController,
-    startDestination: String = Screen.Splash.route
+    startDestination: String = AppScreen.Splash.route
 ) {
     NavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(route = Screen.Splash.route) {
+        composable(route = AppScreen.Splash.route) {
             SplashScreen(
                 onNavigateToAuthentication = {
-                    navController.navigate(Screen.Authentication.route) {
-                        popUpTo(Screen.Splash.route) { inclusive = true }
+                    navController.navigate(AppScreen.Authentication.route) {
+                        popUpTo(AppScreen.Splash.route) { inclusive = true }
                     }
                 },
                 onNavigateToMain = {
-                    navController.navigate(Screen.Main.route) {
-                        popUpTo(Screen.Splash.route) { inclusive = true }
+                    navController.navigate(AppScreen.Main.route) {
+                        popUpTo(AppScreen.Splash.route) { inclusive = true }
                     }
                 },
             )
         }
 
-        composable(route = Screen.Authentication.route) {
+        composable(route = AppScreen.Authentication.route) {
             AuthenticationNavGraph(navController)
         }
 
-        composable(route = Screen.Main.route) {
+        composable(route = AppScreen.Main.route) {
             // TODO: Add MainScreen when created
             // MainScreen()
         }
