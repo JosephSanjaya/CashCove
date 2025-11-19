@@ -17,9 +17,10 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SplashScreen(
-    viewModel: SplashViewModel = koinViewModel(),
+    modifier: Modifier = Modifier,
     onNavigateToAuthentication: () -> Unit = {},
     onNavigateToMain: () -> Unit = {},
+    viewModel: SplashViewModel = koinViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -33,7 +34,7 @@ fun SplashScreen(
     }
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.Center

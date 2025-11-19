@@ -13,7 +13,7 @@ object RouteConstants {
         const val MAIN_SCREEN = "main"
     }
 
-    object Main{
+    object Main {
         const val MAIN_MODULE = "main"
     }
 }

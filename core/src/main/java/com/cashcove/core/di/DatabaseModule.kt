@@ -2,7 +2,7 @@ package com.cashcove.core.di
 
 import android.content.Context
 import androidx.room.Room
-import com.cashcove.core.common.AppConstants
+import com.cashcove.core.common.constants.DatabaseConstants
 import com.cashcove.core.database.CashCoveDatabase
 import com.cashcove.core.database.dao.UserDao
 import org.koin.core.annotation.Module
@@ -15,7 +15,7 @@ object DatabaseModule {
         Room.databaseBuilder(
             context,
             CashCoveDatabase::class.java,
-            AppConstants.Database.DATABASE_NAME
+            DatabaseConstants.DATABASE_NAME
         )
             .fallbackToDestructiveMigration(true)
             .build()

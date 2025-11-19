@@ -3,7 +3,7 @@ package com.cashcove.core.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.cashcove.core.common.AppConstants
+import com.cashcove.core.common.constants.DatabaseConstants
 import com.cashcove.core.database.dao.UserDao
 import com.cashcove.core.database.entity.UserEntity
 
@@ -11,7 +11,7 @@ import com.cashcove.core.database.entity.UserEntity
     entities = [
         UserEntity::class,
     ],
-    version = AppConstants.Database.DATABASE_VERSION,
+    version = DatabaseConstants.DATABASE_VERSION,
     exportSchema = false,
 )
 @TypeConverters()

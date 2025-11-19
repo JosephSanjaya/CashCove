@@ -1,5 +1,5 @@
 package com.cashcove.core.common.constants
 
-object Network {
+object NetworkConstants {
     const val BASE_URL = ""
 }
