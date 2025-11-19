@@ -1,4 +1,4 @@
-package com.cashcove.core.common
+package com.cashcove.core.common.constants
 
 object AppConstants {
     private const val ONE_SECOND_MILLIS = 1_000L // in millis
