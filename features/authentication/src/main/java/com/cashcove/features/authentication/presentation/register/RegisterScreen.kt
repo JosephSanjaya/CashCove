@@ -7,9 +7,9 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun RegisterScreen(
-    viewModel: RegisterViewModel = koinViewModel(),
     onNavigateToLogin: CallbackFunction,
     onNavigateToMain: CallbackFunction,
+    viewModel: RegisterViewModel = koinViewModel(),
 ) {
     LaunchedEffect(Unit) {
         viewModel.sideEffect.collect {

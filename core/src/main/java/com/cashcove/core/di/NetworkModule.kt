@@ -1,7 +1,8 @@
 package com.cashcove.core.di
 
 import android.content.Context
-import com.cashcove.core.common.AppConstants
+import com.cashcove.core.common.constants.NetworkConstants
+import com.cashcove.core.common.constants.TimesConstants
 import com.cashcove.core.datastore.AuthPreferencesManager
 import com.cashcove.core.logger.Logger
 import com.cashcove.core.network.error.ErrorHandler
@@ -18,7 +19,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-@Module
+@Module(includes = [LoggerModule::class, DataStoreModule::class])
 object NetworkModule {
 
     @Single
@@ -42,9 +43,9 @@ object NetworkModule {
     ): OkHttpClient {
         return OkHttpClient
             .Builder()
-            .connectTimeout(AppConstants.Times.GENERAL_REQUEST_TIMEOUT, TimeUnit.SECONDS)
-            .readTimeout(AppConstants.Times.REQUEST_READ_TIMEOUT, TimeUnit.SECONDS)
-            .writeTimeout(AppConstants.Times.REQUEST_WRITE_TIMEOUT, TimeUnit.SECONDS)
+            .connectTimeout(TimesConstants.GENERAL_REQUEST_TIMEOUT, TimeUnit.SECONDS)
+            .readTimeout(TimesConstants.REQUEST_READ_TIMEOUT, TimeUnit.SECONDS)
+            .writeTimeout(TimesConstants.REQUEST_WRITE_TIMEOUT, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
             .addInterceptor(authInterceptor)
             .addInterceptor(logInterceptor)
@@ -63,7 +64,7 @@ object NetworkModule {
     ): Retrofit =
         Retrofit
             .Builder()
-            .baseUrl(AppConstants.Network.BASE_URL)
+            .baseUrl(NetworkConstants.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()

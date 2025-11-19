@@ -5,7 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
-import com.cashcove.core.common.AppConstants
+import com.cashcove.core.common.constants.DataStoreConstants
 import com.cashcove.core.datastore.AuthPreferencesManager
 import com.cashcove.core.datastore.UserPreferencesManager
 import org.koin.core.annotation.Module
@@ -21,7 +21,7 @@ object DataStoreModule {
     ): DataStore<Preferences> {
         return PreferenceDataStoreFactory.create(
             produceFile = {
-                context.preferencesDataStoreFile(AppConstants.DataStore.USER_PREFERENCES_NAME)
+                context.preferencesDataStoreFile(DataStoreConstants.USER_PREFERENCES_NAME)
             }
         )
     }
@@ -33,7 +33,7 @@ object DataStoreModule {
     ): DataStore<Preferences> {
         return PreferenceDataStoreFactory.create(
             produceFile = {
-                context.preferencesDataStoreFile(AppConstants.Authentication.AUTH_PREFERENCES_NAME)
+                context.preferencesDataStoreFile(DataStoreConstants.AUTH_PREFERENCES_NAME)
             }
         )
     }
