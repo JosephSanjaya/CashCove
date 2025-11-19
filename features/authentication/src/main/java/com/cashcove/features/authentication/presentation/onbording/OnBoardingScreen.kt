@@ -2,6 +2,7 @@ package com.cashcove.features.authentication.presentation.onbording
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import com.cashcove.core.common.model.CallbackFunction
 import com.cashcove.core.R as coreR
 import com.cashcove.features.authentication.data.entity.OnBoardingPageModel
 import org.koin.androidx.compose.koinViewModel
@@ -9,12 +10,14 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun OnBoardingScreen(
     viewModel: OnBoardingViewModel = koinViewModel(),
-    onNavigateToRegister: () -> Unit,
+    onNavigateToRegister: CallbackFunction,
+    onNavigateToLogin: CallbackFunction,
 ) {
     LaunchedEffect(Unit) {
         viewModel.sideEffect.collect {
             when (it) {
-                OnBoardingSideEffect.NavigateToRegister -> onNavigateToRegister
+                OnBoardingSideEffect.NavigateToRegister -> onNavigateToRegister()
+                OnBoardingSideEffect.NavigateToLogin -> onNavigateToLogin()
             }
         }
     }

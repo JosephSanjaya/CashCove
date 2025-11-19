@@ -4,10 +4,10 @@ import com.cashcove.core.viewmodel.BaseViewModel
 
 class OnBoardingViewModel(initialState: Unit) :
     BaseViewModel<Unit, OnBoardingIntent, OnBoardingSideEffect>(initialState) {
-    override fun onIntent(intent: OnBoardingIntent) {
+    override fun onIntent(intent: OnBoardingIntent) = postSideEffect(
         when (intent) {
-            OnBoardingIntent.NavigateToRegister ->
-                postSideEffect(OnBoardingSideEffect.NavigateToRegister)
+            OnBoardingIntent.NavigateToLogin -> OnBoardingSideEffect.NavigateToLogin
+            OnBoardingIntent.NavigateToRegister -> OnBoardingSideEffect.NavigateToRegister
         }
-    }
+    )
 }
