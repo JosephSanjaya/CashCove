@@ -1,12 +1,12 @@
 package com.cashcove.core.common.model
 
-open class UiState {
-    object Success : UiState()
-    data class Error(
-        val error: String,
-        private val unique: Long = System.currentTimeMillis()
-    ) : UiState()
-
-    object Loading : UiState()
-    object Idle : UiState()
+/**
+ * A generic UI State wrapper that can be used across the application.
+ * Using sealed interface allows for exhaustive when branches.
+ */
+sealed interface UiState<out T> {
+    data class Success<T>(val data: T) : UiState<T>
+    data class Error(val message: String? = null) : UiState<Nothing>
+    data object Loading : UiState<Nothing>
+    data object Idle : UiState<Nothing>
 }
