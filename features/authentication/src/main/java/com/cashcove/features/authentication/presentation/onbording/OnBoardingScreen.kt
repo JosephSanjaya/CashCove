@@ -1,20 +1,19 @@
 package com.cashcove.features.authentication.presentation.onbording
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil3.compose.AsyncImage
 import com.cashcove.core.common.model.CallbackFunction
+import com.cashcove.core.ui.components.CashCoveContentLoader
 import com.cashcove.core.ui.theme.CashCoveTheme
-import com.cashcove.core.R as coreR
-import com.cashcove.features.authentication.data.entity.OnBoardingPageModel
 import kotlinx.collections.immutable.PersistentList
-import kotlinx.collections.immutable.persistentListOf
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -23,6 +22,9 @@ fun OnBoardingScreen(
     onNavigateToLogin: CallbackFunction,
     viewModel: OnBoardingViewModel = koinViewModel(),
 ) {
+
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
     LaunchedEffect(Unit) {
         viewModel.sideEffect.collect {
             when (it) {
@@ -31,60 +33,43 @@ fun OnBoardingScreen(
             }
         }
     }
-    val onboardingList = persistentListOf(
-        OnBoardingPageModel(
-            title = "Welcome",
-            description = "Welcome to CashCove app! Manage your",
-            imageRes = coreR.drawable.outline_attach_money_24
-        ),
-        OnBoardingPageModel(
-            title = "Track Your Expenses",
-            description = "Keep track of all your expenses.",
-            imageRes = coreR.drawable.outline_attach_money_24
-        ),
-        OnBoardingPageModel(
-            title = "Get Started",
-            description = "Start managing your finances today.",
-            imageRes = coreR.drawable.outline_attach_money_24
-        ),
-    )
-    OnBoardingContent(
-        onboardingList = onboardingList,
-        onFinishClicked = {}
-    )
+    CashCoveContentLoader(state.onboardingDataUiState) {
+        OnBoardingContent(
+            it.onboardingPages,
+            { viewModel.onIntent(OnBoardingIntent.OnboardingFinished) }
+        )
+    }
 }
 
 @Composable
 private fun OnBoardingContent(
-    onboardingList: PersistentList<OnBoardingPageModel>,
+    onboardingList: PersistentList<OnBoardingState.OnboardingPage>,
     onFinishClicked: CallbackFunction,
 ) {
-    Column(Modifier.fillMaxSize()) {
-        onboardingList.forEach {
-            Column(Modifier.fillMaxWidth()) {
-                Text(it.title)
-                Text(it.description)
-            }
-        }
-        Button(onClick = onFinishClicked) {
-            Text("Next")
-        }
+    Onboarding(onboardingList)
+    Button(onClick = onFinishClicked) { Text("Skip") }
+}
+
+@Composable
+private fun Onboarding(onboardingPages: PersistentList<OnBoardingState.OnboardingPage>) {
+    val pagerState = rememberPagerState(
+        initialPage = 0,
+        pageCount = { onboardingPages.size })
+    HorizontalPager(state = pagerState, userScrollEnabled = true) { index ->
+        AsyncImage(
+            model = onboardingPages[index].imageUrl,
+            contentDescription = null
+        )
+        Text(onboardingPages[index].title)
+        Text(onboardingPages[index].description)
     }
+
 }
 
 @Preview(showBackground = true, heightDp = 500)
 @Composable
 private fun OnBoardingContentPreview() {
     CashCoveTheme {
-        OnBoardingContent(
-            onboardingList = persistentListOf(
-                OnBoardingPageModel(
-                    title = "Get Started",
-                    description = "Start managing your finances today.",
-                    imageRes = coreR.drawable.outline_attach_money_24
-                )
-            ),
-            onFinishClicked = {}
-        )
+
     }
 }
