@@ -26,7 +26,7 @@ object RepositoryModule {
      * Provides repository dependencies as a single object.
      * This simplifies repository creation in feature modules by bundling
      * all BaseRepository dependencies together.
-     * 
+     *
      * Following Android architecture best practices, this centralizes
      * all common repository dependencies in one place.
      */
@@ -43,7 +43,7 @@ object RepositoryModule {
      * Provides a shared Ktorfit instance for creating API services.
      * This centralizes the HTTP client configuration and makes it reusable
      * across all feature modules.
-     * 
+     *
      * Benefits:
      * - Single source of truth for API configuration
      * - Consistent JSON serialization settings
@@ -59,16 +59,18 @@ object RepositoryModule {
                 preconfigured = okHttpClient
             }
             install(ContentNegotiation) {
-                json(Json {
-                    ignoreUnknownKeys = true
-                    isLenient = true
-                    encodeDefaults = false
-                    prettyPrint = false
-                    coerceInputValues = true
-                })
+                json(
+                    Json {
+                        ignoreUnknownKeys = true
+                        isLenient = true
+                        encodeDefaults = false
+                        prettyPrint = false
+                        coerceInputValues = true
+                    }
+                )
             }
         }
-        
+
         return Ktorfit.Builder()
             .baseUrl(NetworkConstants.BASE_URL)
             .httpClient(httpClient)
@@ -79,7 +81,7 @@ object RepositoryModule {
 /**
  * Data class that holds the dependencies required by BaseRepository.
  * This simplifies dependency injection for repositories.
- * 
+ *
  * Following the Dependency Inversion Principle, this bundles all
  * infrastructure dependencies that repositories need.
  */
@@ -88,4 +90,3 @@ data class RepositoryDependencies(
     val connectivityChecker: ConnectivityChecker,
     val logger: Logger
 )
-

@@ -1,16 +1,16 @@
-package com.cashcove.features.authentication.data.entity.response
+package com.cashcove.features.authentication.data.model.response
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LogoutResponseModel(
+data class GetUserResponseModel(
     val success: Boolean,
-    val data: LogoutData? = null,
+    val data: UserData? = null,
     val error: ErrorData? = null
 ) {
     @Serializable
-    data class LogoutData(
-        val message: String
+    data class UserData(
+        val user: UserModel
     )
 
     @Serializable

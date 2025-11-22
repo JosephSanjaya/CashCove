@@ -35,7 +35,7 @@ suspend fun <T> safeApiCall(
     } catch (e: Exception) {
         // Handle the error using ErrorHandler
         val networkError = errorHandler.handleError(e)
-        
+
         // Extract error message from NetworkError
         val errorMessage = when (networkError) {
             is NetworkError.HttpError -> {
@@ -54,7 +54,7 @@ suspend fun <T> safeApiCall(
                 "Request timeout. Please try again"
             }
         }
-        
+
         logger.e("SafeApiCall", "API call failed: $errorMessage", e)
         UiState.Error(errorMessage)
     }

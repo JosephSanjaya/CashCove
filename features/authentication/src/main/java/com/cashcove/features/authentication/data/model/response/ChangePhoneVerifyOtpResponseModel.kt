@@ -1,17 +1,17 @@
-package com.cashcove.features.authentication.data.entity.response
+package com.cashcove.features.authentication.data.model.response
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ChangePhoneSendOtpResponseModel(
+data class ChangePhoneVerifyOtpResponseModel(
     val success: Boolean,
-    val data: OtpData? = null,
+    val data: ChangePhoneData? = null,
     val error: ErrorData? = null
 ) {
     @Serializable
-    data class OtpData(
+    data class ChangePhoneData(
         val message: String,
-        val expiresIn: Int
+        val user: UserModel
     )
 
     @Serializable

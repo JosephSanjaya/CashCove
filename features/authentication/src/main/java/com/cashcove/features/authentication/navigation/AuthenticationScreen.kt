@@ -1,4 +1,4 @@
-package com.cashcove.features.authentication.data.navigation
+package com.cashcove.features.authentication.navigation
 
 import com.cashcove.core.common.constants.RouteConstants
 

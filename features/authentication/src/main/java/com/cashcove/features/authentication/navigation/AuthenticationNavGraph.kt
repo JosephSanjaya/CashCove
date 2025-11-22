@@ -1,4 +1,4 @@
-package com.cashcove.features.authentication.data.navigation
+package com.cashcove.features.authentication.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost

@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.cashcove.app.splash.SplashScreen
-import com.cashcove.features.authentication.data.navigation.AuthenticationNavGraph
+import com.cashcove.features.authentication.navigation.AuthenticationNavGraph
 @Composable
 fun SplashNavGraph(
     navController: NavHostController,

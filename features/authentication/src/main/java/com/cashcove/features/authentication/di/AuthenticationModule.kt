@@ -1,8 +1,9 @@
-package com.cashcove.features.authentication.data.di
+package com.cashcove.features.authentication.di
 
 import com.cashcove.features.authentication.data.repository.AuthenticationRepository
 import com.cashcove.features.authentication.data.repository.AuthenticationRepositoryImpl
 import com.cashcove.features.authentication.data.service.AuthenticationService
+import com.cashcove.features.authentication.domain.usecase.LoginUsecase
 import com.cashcove.features.authentication.presentation.login.LoginState
 import com.cashcove.features.authentication.presentation.login.LoginViewModel
 import com.cashcove.features.authentication.presentation.onbording.OnBoardingState
@@ -17,8 +18,8 @@ import org.koin.dsl.module
 
 val AuthenticationModule = module {
     single<AuthenticationService> {
-        val ktorfit: Ktorfit = get()
-        ktorfit.create()
+        // todo: fix deprecated `create` method
+        get<Ktorfit>().create()
     }
 
     single<AuthenticationRepository> {
@@ -28,12 +29,9 @@ val AuthenticationModule = module {
         )
     }
 
-    viewModel {
-        LoginViewModel(
-            initialState = LoginState(),
-            repository = get()
-        )
-    }
+    // login
+    factory { LoginUsecase(repository = get()) }
+    viewModel { LoginViewModel(loginUsecase = get()) }
 
     viewModel {
         RegisterViewModel(

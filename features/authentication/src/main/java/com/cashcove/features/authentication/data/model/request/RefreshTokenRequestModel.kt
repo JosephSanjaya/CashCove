@@ -1,4 +1,4 @@
-package com.cashcove.features.authentication.data.entity.request
+package com.cashcove.features.authentication.data.model.request
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
