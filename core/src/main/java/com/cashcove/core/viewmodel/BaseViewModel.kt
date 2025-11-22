@@ -41,10 +41,11 @@ abstract class BaseViewModel<State, Intent, SideEffect>(
         }
     }
 
+    protected abstract fun reduce(intent: Intent)
+
     /**
      * Get current state
      */
     protected fun currentState(): State = _state.value
 
-    abstract fun onIntent(intent: Intent)
 }

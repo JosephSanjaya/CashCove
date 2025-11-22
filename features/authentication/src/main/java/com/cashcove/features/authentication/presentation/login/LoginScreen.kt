@@ -30,6 +30,11 @@ fun LoginScreen(
             when (it) {
                 LoginSideEffect.NavigateToMain -> onNavigateToMain()
                 LoginSideEffect.NavigateToRegister -> onNavigateToRegister()
+                LoginSideEffect.NavigateToOtpVerification -> {
+                    // Navigate to OTP verification screen
+                    // TODO: Add navigation callback when OTP screen is ready
+                    onNavigateToMain() // Temporary: navigate to main for now
+                }
             }
         }
     }
@@ -40,7 +45,7 @@ fun LoginScreen(
             viewModel.onIntent(LoginIntent.UpdatePhoneNumber(phoneNumber))
         },
         onSendOtpClick = {
-            viewModel.onIntent(LoginIntent.SendOtp(state.phoneNumber))
+            viewModel.onIntent(LoginIntent.SendOtp)
         },
     )
 }

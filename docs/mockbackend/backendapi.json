@@ -1,0 +1,925 @@
+{
+  "uuid": "c6f18996-cfe5-4eb5-b058-bf3c9f0e5910",
+  "lastMigration": 33,
+  "name": "Backendapi",
+  "endpointPrefix": "",
+  "latency": 200,
+  "port": 3000,
+  "hostname": "127.0.0.1",
+  "folders": [
+    {
+      "uuid": "48d68c1d-4fd4-4799-b471-a695a369bd13",
+      "name": "auth",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "a1b2c3d4-e5f6-4789-a012-b3c4d5e6f789"
+        },
+        {
+          "type": "route",
+          "uuid": "b2c3d4e5-f6a7-4890-b123-c4d5e6f7a890"
+        },
+        {
+          "type": "route",
+          "uuid": "c3d4e5f6-a7b8-4901-c234-d5e6f7a8b901"
+        },
+        {
+          "type": "route",
+          "uuid": "d4e5f6a7-b8c9-4012-d345-e6f7a8b9c012"
+        },
+        {
+          "type": "route",
+          "uuid": "c9d0e1f2-a3b4-4567-c890-d1e2f3a4b567"
+        },
+        {
+          "type": "route",
+          "uuid": "d0e1f2a3-b4c5-4678-d901-e2f3a4b5c678"
+        },
+        {
+          "type": "route",
+          "uuid": "e1f2a3b4-c5d6-4789-e012-f3a4b5c6d789"
+        },
+        {
+          "type": "route",
+          "uuid": "f2a3b4c5-d6e7-4890-f123-a4b5c6d7e890"
+        }
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "uuid": "c889c738-e233-4a34-980d-77f5e11d6e63",
+      "type": "http",
+      "documentation": "Get onboarding pages",
+      "method": "get",
+      "endpoint": "onboarding",
+      "responses": [
+        {
+          "uuid": "34b5b30e-0c7d-4a00-87e6-60fd260bb7da",
+          "body": "{\n  \"success\": true,\n  \"data\": {\n    \"pages\": [\n      {\n        \"image_url\": \"https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800\",\n        \"title\": \"Welcome to CashCove\",\n        \"description\": \"Take control of your finances with our intuitive money management app. Track expenses, set budgets, and achieve your financial goals effortlessly.\"\n      },\n      {\n        \"image_url\": \"https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800\",\n        \"title\": \"Track Every Expense\",\n        \"description\": \"Easily record and categorize your spending. Get insights into where your money goes with detailed analytics and visual reports.\"\n      },\n      {\n        \"image_url\": \"https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800\",\n        \"title\": \"Smart Budget Planning\",\n        \"description\": \"Create personalized budgets for different categories. Stay on track with real-time notifications and spending alerts.\"\n      },\n      {\n        \"image_url\": \"https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=800\",\n        \"title\": \"Secure & Private\",\n        \"description\": \"Your financial data is encrypted and stored securely. We never share your information with third parties. Your privacy is our priority.\"\n      },\n      {\n        \"image_url\": \"https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800\",\n        \"title\": \"Ready to Get Started?\",\n        \"description\": \"Join thousands of users who are already managing their finances better. Sign up now and take the first step towards financial freedom.\"\n      }\n    ]\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "50c74144-de88-4702-b5ad-9006126e2da6",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_SERVER_ERROR\",\n    \"message\": \"Internal server error occurred\"\n  }\n}",
+          "latency": 300,
+          "statusCode": 500,
+          "label": "Server Error",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "error",
+              "value": "true",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "a1b2c3d4-e5f6-4789-a012-b3c4d5e6f789",
+      "type": "http",
+      "documentation": "Send OTP to phone number for login or registration",
+      "method": "post",
+      "endpoint": "auth/send-otp",
+      "responses": [
+        {
+          "uuid": "0dbe9969-07fa-4ae0-b487-70c2c51e3e9f",
+          "body": "{\n  \"success\": true,\n  \"data\": {\n    \"message\": \"OTP has been sent to your phone number\",\n    \"expiresIn\": 300\n  }\n}",
+          "latency": 200,
+          "statusCode": 200,
+          "label": "OTP Sent",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "fc5e1174-8437-48cf-97fc-918c0caa5816",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_VALIDATION\",\n    \"message\": \"Phone number is required\",\n    \"details\": [\n      {\n        \"field\": \"phoneNumber\",\n        \"message\": \"Phone number must be in international format (e.g., +1234567890)\"\n      }\n    ]\n  }\n}",
+          "latency": 100,
+          "statusCode": 400,
+          "label": "Validation Error",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "phoneNumber",
+              "value": "",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "525d97bd-9626-46af-982b-19ed23ee85b9",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_RATE_LIMIT\",\n    \"message\": \"Too many OTP requests. Please try again after 60 seconds\"\n  }\n}",
+          "latency": 150,
+          "statusCode": 429,
+          "label": "Rate Limit",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "phoneNumber",
+              "value": "+1999999999",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "2e973841-5bb0-4dab-acdb-e123c4dacb9b",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_SERVER_ERROR\",\n    \"message\": \"Internal server error occurred\"\n  }\n}",
+          "latency": 500,
+          "statusCode": 500,
+          "label": "Server Error",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "error",
+              "value": "server",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "b2c3d4e5-f6a7-4890-b123-c4d5e6f7a890",
+      "type": "http",
+      "documentation": "Verify OTP and complete login or registration",
+      "method": "post",
+      "endpoint": "auth/verify-otp",
+      "responses": [
+        {
+          "uuid": "6bd632cf-635e-466d-ab2a-ed95a43ef046",
+          "body": "{\n  \"success\": true,\n  \"data\": {\n    \"user\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"phoneNumber\": \"+1234567890\",\n      \"fullName\": \"John Doe\",\n      \"isPhoneVerified\": true,\n      \"createdAt\": \"2024-01-15T10:30:00Z\"\n    },\n    \"tokens\": {\n      \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1NTBlODQwMC1lMjliLTQxZDQtYTcxNi00NDY2NTU0NDAwMDAiLCJpYXQiOjE3MDUzMjE4MDAsImV4cCI6MTcwNTQwODIwMH0.example\",\n      \"refreshToken\": \"refresh_token_12345\",\n      \"expiresIn\": 86400\n    }\n  }\n}",
+          "latency": 200,
+          "statusCode": 200,
+          "label": "OTP Verified",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "a611cef3-701a-43ef-845d-174e76c576bc",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_VALIDATION\",\n    \"message\": \"Phone number and OTP are required\",\n    \"details\": [\n      {\n        \"field\": \"phoneNumber\",\n        \"message\": \"Phone number is required\"\n      },\n      {\n        \"field\": \"otp\",\n        \"message\": \"OTP is required\"\n      }\n    ]\n  }\n}",
+          "latency": 100,
+          "statusCode": 400,
+          "label": "Validation Error",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "phoneNumber",
+              "value": "",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "f913ad0e-cfec-4758-9e58-8a8c582c9dec",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_INVALID_OTP\",\n    \"message\": \"Invalid or expired OTP\"\n  }\n}",
+          "latency": 150,
+          "statusCode": 400,
+          "label": "Invalid OTP",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "otp",
+              "value": "000000",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "a6828f42-d5bf-4000-b6e2-05446286bc28",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_OTP_EXPIRED\",\n    \"message\": \"OTP has expired. Please request a new one\"\n  }\n}",
+          "latency": 150,
+          "statusCode": 400,
+          "label": "OTP Expired",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "otp",
+              "value": "999999",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "c3d4e5f6-a7b8-4901-c234-d5e6f7a8b901",
+      "type": "http",
+      "documentation": "Logout and invalidate tokens",
+      "method": "post",
+      "endpoint": "auth/logout",
+      "responses": [
+        {
+          "uuid": "bcc3e279-4b45-49fa-8031-c8b5989f125d",
+          "body": "{\n  \"success\": true,\n  \"data\": {\n    \"message\": \"Successfully logged out\"\n  }\n}",
+          "latency": 100,
+          "statusCode": 200,
+          "label": "Logout Success",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "074b774e-960f-43d6-8271-7cacdaeaf97a",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_UNAUTHORIZED\",\n    \"message\": \"Authentication token is missing or invalid\"\n  }\n}",
+          "latency": 100,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "d4e5f6a7-b8c9-4012-d345-e6f7a8b9c012",
+      "type": "http",
+      "documentation": "Refresh access token using refresh token",
+      "method": "post",
+      "endpoint": "auth/refresh-token",
+      "responses": [
+        {
+          "uuid": "8e96291b-bfb4-4bd2-89c5-fb0fe73076ea",
+          "body": "{\n  \"success\": true,\n  \"data\": {\n    \"tokens\": {\n      \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1NTBlODQwMC1lMjliLTQxZDQtYTcxNi00NDY2NTU0NDAwMDAiLCJpYXQiOjE3MDUzMjE4MDAsImV4cCI6MTcwNTQwODIwMH0.new_token\",\n      \"refreshToken\": \"refresh_token_new_12345\",\n      \"expiresIn\": 86400\n    }\n  }\n}",
+          "latency": 150,
+          "statusCode": 200,
+          "label": "Token Refresh Success",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "938e765c-a28d-482e-9b22-dfee6a4fbc64",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_VALIDATION\",\n    \"message\": \"Refresh token is required\"\n  }\n}",
+          "latency": 100,
+          "statusCode": 400,
+          "label": "Validation Error",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "refreshToken",
+              "value": "",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "00184448-1686-434c-b2a3-7312712fcf87",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_INVALID_REFRESH_TOKEN\",\n    \"message\": \"Refresh token is invalid or expired\"\n  }\n}",
+          "latency": 150,
+          "statusCode": 401,
+          "label": "Invalid Refresh Token",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "refreshToken",
+              "value": "invalid_token",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "c9d0e1f2-a3b4-4567-c890-d1e2f3a4b567",
+      "type": "http",
+      "documentation": "Get current authenticated user profile",
+      "method": "get",
+      "endpoint": "auth/me",
+      "responses": [
+        {
+          "uuid": "d0544851-c662-47bb-b5bb-6ca76121cd42",
+          "body": "{\n  \"success\": true,\n  \"data\": {\n    \"user\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"phoneNumber\": \"+1234567890\",\n      \"fullName\": \"John Doe\",\n      \"isPhoneVerified\": true,\n      \"createdAt\": \"2024-01-15T10:30:00Z\",\n      \"updatedAt\": \"2024-01-20T14:45:00Z\"\n    }\n  }\n}",
+          "latency": 150,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "f47d09e9-1551-41e9-b786-e7e68accea8a",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_UNAUTHORIZED\",\n    \"message\": \"Authentication token is missing or invalid\"\n  }\n}",
+          "latency": 100,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "1cdba1ac-6a0d-4a6f-9ed1-d0e2bc97e364",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_INVALID_TOKEN\",\n    \"message\": \"Token is invalid or expired\"\n  }\n}",
+          "latency": 150,
+          "statusCode": 401,
+          "label": "Invalid Token",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "Bearer invalid_token",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "d0e1f2a3-b4c5-4678-d901-e2f3a4b5c678",
+      "type": "http",
+      "documentation": "Update current user profile",
+      "method": "put",
+      "endpoint": "auth/me",
+      "responses": [
+        {
+          "uuid": "91cb7710-5781-41b6-bcdb-401d06e5f111",
+          "body": "{\n  \"success\": true,\n  \"data\": {\n    \"user\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"phoneNumber\": \"+1234567890\",\n      \"fullName\": \"John Doe Updated\",\n      \"isPhoneVerified\": true,\n      \"createdAt\": \"2024-01-15T10:30:00Z\",\n      \"updatedAt\": \"2024-01-21T10:00:00Z\"\n    }\n  }\n}",
+          "latency": 200,
+          "statusCode": 200,
+          "label": "Update Success",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "4ad49499-b2a5-4f1c-878e-442ccc214046",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_VALIDATION\",\n    \"message\": \"Validation failed\",\n    \"details\": [\n      {\n        \"field\": \"fullName\",\n        \"message\": \"Full name must be at least 2 characters\"\n      }\n    ]\n  }\n}",
+          "latency": 100,
+          "statusCode": 400,
+          "label": "Validation Error",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "fullName",
+              "value": "",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "c3f941ed-e237-4ce4-adeb-a9321a11cb17",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_UNAUTHORIZED\",\n    \"message\": \"Authentication token is missing or invalid\"\n  }\n}",
+          "latency": 100,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "e1f2a3b4-c5d6-4789-e012-f3a4b5c6d789",
+      "type": "http",
+      "documentation": "Change phone number - send OTP to new phone number",
+      "method": "post",
+      "endpoint": "auth/change-phone/send-otp",
+      "responses": [
+        {
+          "uuid": "41133ec3-ec74-4a47-89cc-00ef75f461eb",
+          "body": "{\n  \"success\": true,\n  \"data\": {\n    \"message\": \"OTP has been sent to the new phone number\",\n    \"expiresIn\": 300\n  }\n}",
+          "latency": 200,
+          "statusCode": 200,
+          "label": "OTP Sent",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "24834ed9-605e-467d-9f3f-9b4e819565c1",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_VALIDATION\",\n    \"message\": \"New phone number is required\"\n  }\n}",
+          "latency": 100,
+          "statusCode": 400,
+          "label": "Validation Error",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "newPhoneNumber",
+              "value": "",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "46261e26-c62f-4c0d-a9ab-e6d32e53de75",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_UNAUTHORIZED\",\n    \"message\": \"Authentication token is missing or invalid\"\n  }\n}",
+          "latency": 100,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "05787b82-926a-49a0-8aa0-0afa9f5b2b96",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_PHONE_EXISTS\",\n    \"message\": \"This phone number is already registered\"\n  }\n}",
+          "latency": 150,
+          "statusCode": 409,
+          "label": "Phone Exists",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "newPhoneNumber",
+              "value": "+1999999999",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "f2a3b4c5-d6e7-4890-f123-a4b5c6d7e890",
+      "type": "http",
+      "documentation": "Verify OTP and complete phone number change",
+      "method": "post",
+      "endpoint": "auth/change-phone/verify-otp",
+      "responses": [
+        {
+          "uuid": "202cd395-866e-4166-9596-e63601f31252",
+          "body": "{\n  \"success\": true,\n  \"data\": {\n    \"message\": \"Phone number changed successfully\",\n    \"user\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"phoneNumber\": \"+1987654321\",\n      \"fullName\": \"John Doe\",\n      \"isPhoneVerified\": true\n    }\n  }\n}",
+          "latency": 200,
+          "statusCode": 200,
+          "label": "Phone Changed",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "0294795f-26f2-44cb-b93d-48519cc92765",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_VALIDATION\",\n    \"message\": \"New phone number and OTP are required\"\n  }\n}",
+          "latency": 100,
+          "statusCode": 400,
+          "label": "Validation Error",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "otp",
+              "value": "",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "f534ae38-b0aa-4b8e-bbcc-c285ebeac1d0",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_INVALID_OTP\",\n    \"message\": \"Invalid or expired OTP\"\n  }\n}",
+          "latency": 150,
+          "statusCode": 400,
+          "label": "Invalid OTP",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "otp",
+              "value": "000000",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "e35c9190-4dac-4ad1-a9bf-83f64cad0bdf",
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"ERR_UNAUTHORIZED\",\n    \"message\": \"Authentication token is missing or invalid\"\n  }\n}",
+          "latency": 100,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "c889c738-e233-4a34-980d-77f5e11d6e63"
+    },
+    {
+      "type": "folder",
+      "uuid": "48d68c1d-4fd4-4799-b471-a695a369bd13"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}
