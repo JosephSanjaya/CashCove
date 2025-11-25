@@ -14,6 +14,7 @@ object DiManager {
                 DatabaseModule.module,
                 DataStoreModule.module,
                 NetworkModule.module,
+                RepositoryModule.module,
             )
         }
     }

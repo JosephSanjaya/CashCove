@@ -10,6 +10,7 @@ object RouteConstants {
         const val ONBOARDING_SCREEN = "onboarding"
         const val LOGIN_SCREEN = "login"
         const val REGISTER_SCREEN = "register"
+        const val OTP_SCREEN = "otp"
         const val MAIN_SCREEN = "main"
     }
 

@@ -15,8 +15,12 @@ import com.cashcove.core.common.utils.extensions.safeError
 import com.cashcove.core.ui.theme.CashCoveTheme
 
 @Composable
-fun CashCoveError(error: String?, onRetry: CallbackFunction? = null) {
-    Column(Modifier.fillMaxSize()) {
+fun CashCoveError(
+    error: String?,
+    modifier: Modifier = Modifier,
+    onRetry: CallbackFunction? = null,
+) {
+    Column(modifier.fillMaxSize()) {
         Icon(
             Icons.Default.Warning,
             contentDescription = "error",
@@ -32,6 +36,6 @@ fun CashCoveError(error: String?, onRetry: CallbackFunction? = null) {
 @Composable
 private fun CashCoveErrorPreview() {
     CashCoveTheme {
-        CashCoveError("error!", {})
+        CashCoveError(error = "error!") {}
     }
 }

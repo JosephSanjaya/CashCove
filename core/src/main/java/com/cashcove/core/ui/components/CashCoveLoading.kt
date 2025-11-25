@@ -10,8 +10,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.cashcove.core.ui.theme.CashCoveTheme
 
 @Composable
-fun CashCoveLoading() {
-    Column(Modifier.fillMaxSize()) {
+fun CashCoveLoading(modifier: Modifier = Modifier) {
+    Column(modifier.fillMaxSize()) {
         CircularProgressIndicator()
         Text("Loading...")
     }
