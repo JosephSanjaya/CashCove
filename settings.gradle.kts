@@ -1,15 +1,10 @@
 pluginManagement {
     includeBuild("sjy-build-logic")
     repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
+        google()
         mavenCentral()
         gradlePluginPortal()
+        maven(url="https://maven.myket.ir")
     }
 }
 dependencyResolutionManagement {
@@ -17,6 +12,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven(url="https://maven.myket.ir")
     }
     versionCatalogs {
         create("sjy") {
@@ -27,4 +23,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Cash Cove"
 include(":app")
- 
+include(":core")
+include(":features:authentication")

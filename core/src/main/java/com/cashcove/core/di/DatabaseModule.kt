@@ -1,0 +1,27 @@
+package com.cashcove.core.di
+
+import android.content.Context
+import androidx.room.Room
+import com.cashcove.core.common.constants.DatabaseConstants
+import com.cashcove.core.database.CashCoveDatabase
+import com.cashcove.core.database.dao.UserDao
+import org.koin.core.annotation.Module
+import org.koin.core.annotation.Single
+
+@Module
+object DatabaseModule {
+    @Single
+    fun provideDatabase(context: Context): CashCoveDatabase =
+        Room.databaseBuilder(
+            context,
+            CashCoveDatabase::class.java,
+            DatabaseConstants.DATABASE_NAME
+        )
+            .fallbackToDestructiveMigration(true)
+            .build()
+
+    @Single
+    fun provideUserDao(database: CashCoveDatabase): UserDao {
+        return database.userDao()
+    }
+}

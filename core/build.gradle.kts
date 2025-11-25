@@ -1,0 +1,36 @@
+plugins {
+    alias(sjy.plugins.buildlogic.lib)
+    alias(sjy.plugins.buildlogic.compose)
+    alias(sjy.plugins.buildlogic.detekt)
+    alias(sjy.plugins.ksp)
+}
+
+android {
+    namespace = "com.cashcove.core"
+
+    defaultConfig {
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+}
+
+dependencies {
+    coreLibraryDesugaring(libs.androidx.desugar)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp.logging)
+    implementation(libs.store)
+    implementation(libs.bundles.room)
+    implementation(libs.bundles.datastore)
+    ksp(libs.room.compiler)
+}
