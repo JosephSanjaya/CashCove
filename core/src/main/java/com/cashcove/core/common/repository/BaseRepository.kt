@@ -1,5 +1,6 @@
 package com.cashcove.core.common.repository
 
+import com.cashcove.core.common.model.RepositoryBaseResult
 import com.cashcove.core.common.model.UiState
 import com.cashcove.core.common.utils.network.safeApiCall
 import com.cashcove.core.di.RepositoryDependencies
@@ -21,7 +22,7 @@ abstract class BaseRepository(
      */
     protected suspend fun <T> safeApiCall(
         apiCall: suspend () -> T
-    ): UiState<T> {
+    ): RepositoryBaseResult<T> {
         return safeApiCall(
             errorHandler = dependencies.errorHandler,
             connectivityChecker = dependencies.connectivityChecker,

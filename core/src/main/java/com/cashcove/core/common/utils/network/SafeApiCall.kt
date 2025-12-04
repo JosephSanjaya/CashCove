@@ -1,5 +1,6 @@
 package com.cashcove.core.common.utils.network
 
+import com.cashcove.core.common.model.RepositoryBaseResult
 import com.cashcove.core.common.model.UiState
 import com.cashcove.core.logger.Logger
 import com.cashcove.core.network.error.ErrorHandler
@@ -14,48 +15,29 @@ import com.cashcove.core.network.util.ConnectivityChecker
  * @param connectivityChecker The connectivity checker to verify internet connection
  * @param logger The logger for logging errors and warnings
  * @param apiCall The suspend function that represents the API call
- * @return UiState<T> - Either Success with data or Error with message
+ * @return RepositoryBaseResult<T> - Either Success with data or Error with message
  */
 suspend fun <T> safeApiCall(
     errorHandler: ErrorHandler,
     connectivityChecker: ConnectivityChecker,
     logger: Logger,
     apiCall: suspend () -> T
-): UiState<T> {
+): RepositoryBaseResult<T> {
     return try {
         // Check connectivity before making the call
         if (!connectivityChecker.isConnected()) {
             logger.w("SafeApiCall", "No internet connection available")
-            return UiState.Error("No internet connection available")
+            return RepositoryBaseResult.Error(Exception("No internet connection available"))
         }
 
         // Execute the API call
         val result = apiCall()
-        UiState.Success(result)
+        RepositoryBaseResult.Success(result)
     } catch (e: Exception) {
         // Handle the error using ErrorHandler
         val networkError = errorHandler.handleError(e)
 
-        // Extract error message from NetworkError
-        val errorMessage = when (networkError) {
-            is NetworkError.HttpError -> {
-                networkError.message ?: "HTTP Error: ${networkError.code}"
-            }
-            is NetworkError.NetworkException -> {
-                networkError.message ?: "Network error occurred"
-            }
-            is NetworkError.UnknownError -> {
-                networkError.message ?: "An unknown error occurred"
-            }
-            is NetworkError.NoInternetConnection -> {
-                "No internet connection available"
-            }
-            is NetworkError.Timeout -> {
-                "Request timeout. Please try again"
-            }
-        }
-
-        logger.e("SafeApiCall", "API call failed: $errorMessage", e)
-        UiState.Error(errorMessage)
+        logger.e("SafeApiCall", "API call failed: ${networkError.message}}", e)
+        RepositoryBaseResult.Error(networkError)
     }
 }
