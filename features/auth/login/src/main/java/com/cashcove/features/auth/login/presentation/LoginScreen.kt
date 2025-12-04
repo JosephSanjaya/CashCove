@@ -54,7 +54,7 @@ fun LoginScreen(
 @Composable
 private fun LoginContent(
     phoneNumber: String,
-    loginUiState: UiState,
+    loginUiState: UiState<Nothing>,
     onPhoneNumberChange: StringCallbackFunction,
     onSendOtpClick: CallbackFunction,
 ) {
