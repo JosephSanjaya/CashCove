@@ -11,6 +11,7 @@ val LoginModule = module {
         get<Ktorfit>.create()
     }
 
+    // todo: implement injection for usecase too
     single<LoginRepository> {
         LoginRepositoryImpl(
             loginService = get(),

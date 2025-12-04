@@ -16,6 +16,7 @@ import com.cashcove.core.common.model.CallbackFunction
 import com.cashcove.core.common.model.StringCallbackFunction
 import com.cashcove.core.common.model.UiState
 import com.cashcove.core.ui.theme.CashCoveTheme
+import com.cashcove.features.auth.login.domain.model.Login
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -54,7 +55,7 @@ fun LoginScreen(
 @Composable
 private fun LoginContent(
     phoneNumber: String,
-    loginUiState: UiState<Nothing>,
+    loginUiState: UiState<Login>,
     onPhoneNumberChange: StringCallbackFunction,
     onSendOtpClick: CallbackFunction,
 ) {

@@ -1,8 +1,9 @@
 package com.cashcove.features.auth.login.presentation
 
 import androidx.lifecycle.viewModelScope
+import com.cashcove.core.common.model.UiState
+import com.cashcove.core.common.utils.extensions.toUiState
 import com.cashcove.core.viewmodel.BaseViewModel
-import com.cashcove.features.auth.login.domain.model.LoginUsecaseResult
 import com.cashcove.features.auth.login.domain.usecase.UserLoginUsecase
 import kotlinx.coroutines.launch
 
@@ -26,10 +27,12 @@ class LoginViewModel(
             is LoginIntent.OtpSent -> postSideEffect(LoginSideEffect.NavigateToOtpVerification)
             is LoginIntent.SendOtp -> {
                 viewModelScope.launch {
-                    loginUsecase(intent.phoneNumber).collect {
-                        updateState { copy(loginUiState = it) }
-                        if (it is LoginUsecaseResult.Success) {
-                            postSideEffect(LoginSideEffect.NavigateToOtpVerification)
+                    loginUsecase(intent.phoneNumber).collect { loginUsecaseResult ->
+                        loginUsecaseResult.toUiState().let {
+                            updateState { copy(loginUiState = it) }
+                            if (it is UiState.Success) {
+                                postSideEffect(LoginSideEffect.NavigateToOtpVerification)
+                            }
                         }
                     }
                 }
