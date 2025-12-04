@@ -25,3 +25,7 @@ rootProject.name = "Cash Cove"
 include(":app")
 include(":core")
 include(":features:authentication")
+include(":features:auth:login")
+include(":features:auth:otp")
+include(":features:auth:register")
+include(":features:auth:onboarding")
