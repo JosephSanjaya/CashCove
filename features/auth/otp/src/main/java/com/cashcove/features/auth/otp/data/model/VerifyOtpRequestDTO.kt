@@ -1,12 +1,11 @@
-package com.cashcove.features.authentication.data.model.request
+package com.cashcove.features.auth.otp.data.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class VerifyOtpRequestModel(
+data class VerifyOtpRequestDTO(
     @SerialName("phone_number")
     val phoneNumber: String,
     val otp: String
 )
-

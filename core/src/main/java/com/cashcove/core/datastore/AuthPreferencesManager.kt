@@ -10,7 +10,8 @@ import kotlinx.coroutines.flow.map
 
 data class AuthPreferences(
     val isLoggedIn: Boolean = false,
-    val token: String? = null,
+    val accessToken: String? = null,
+    val refreshToken: String? = null,
     val userId: String? = null
 )
 
@@ -19,7 +20,8 @@ class AuthPreferencesManager(
 ) {
     companion object {
         private val IS_LOGGED_IN_KEY = booleanPreferencesKey("is_logged_in")
-        private val TOKEN_KEY = stringPreferencesKey("token")
+        private val ACCESS_TOKEN_KEY = stringPreferencesKey("access_token")
+        private val REFRESH_TOKEN_KEY = stringPreferencesKey("refresh_token")
         private val USER_ID_KEY = stringPreferencesKey("user_id")
     }
 
@@ -27,16 +29,23 @@ class AuthPreferencesManager(
         return dataStore.data.map { preferences ->
             AuthPreferences(
                 isLoggedIn = preferences[IS_LOGGED_IN_KEY] ?: false,
-                token = preferences[TOKEN_KEY],
+                accessToken = preferences[ACCESS_TOKEN_KEY],
+                refreshToken = preferences[REFRESH_TOKEN_KEY],
                 userId = preferences[USER_ID_KEY]
             )
         }
     }
 
-    suspend fun saveAuthData(token: String, userId: String) {
+    val isLoggedInFlow: Flow<Boolean> = dataStore.data.map { it[IS_LOGGED_IN_KEY] ?: false }
+    val accessTokenFlow: Flow<String> = dataStore.data.map { it[ACCESS_TOKEN_KEY] ?: "" }
+    val refreshTokenFlow: Flow<String> = dataStore.data.map { it[REFRESH_TOKEN_KEY] ?: "" }
+    val userIdFlow: Flow<String> = dataStore.data.map { it[USER_ID_KEY] ?: "" }
+
+    suspend fun saveAuthData(accessToken: String, refreshToken: String, userId: String) {
         dataStore.edit { preferences ->
             preferences[IS_LOGGED_IN_KEY] = true
-            preferences[TOKEN_KEY] = token
+            preferences[ACCESS_TOKEN_KEY] = accessToken
+            preferences[REFRESH_TOKEN_KEY] = refreshToken
             preferences[USER_ID_KEY] = userId
         }
     }
@@ -47,16 +56,18 @@ class AuthPreferencesManager(
         }
     }
 
-    suspend fun updateToken(token: String) {
+    suspend fun updateTokens(accessToken: String, refreshToken: String) {
         dataStore.edit { preferences ->
-            preferences[TOKEN_KEY] = token
+            preferences[ACCESS_TOKEN_KEY] = accessToken
+            preferences[REFRESH_TOKEN_KEY] = refreshToken
         }
     }
 
     suspend fun logout() {
         dataStore.edit { preferences ->
             preferences[IS_LOGGED_IN_KEY] = false
-            preferences.remove(TOKEN_KEY)
+            preferences.remove(ACCESS_TOKEN_KEY)
+            preferences.remove(REFRESH_TOKEN_KEY)
             preferences.remove(USER_ID_KEY)
         }
     }
