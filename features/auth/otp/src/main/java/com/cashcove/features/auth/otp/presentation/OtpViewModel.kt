@@ -56,12 +56,21 @@ class OtpViewModel(
             updateState {
                 copy(
                     timerValue = timerValue + 1,
-                    timerValueString = "$diff"
+                    timerValueString = "$diff",
+                    isTimerActive = true,
                 )
             }
             if (diff > maxTimerSeconds)
                 break
             delay(1_000)
+        }
+        updateState {
+            copy(
+                resendOtpUiState = UiState.Idle,
+                timerValue = 60,
+                timerValueString = "",
+                isTimerActive = false,
+            )
         }
     }
 }

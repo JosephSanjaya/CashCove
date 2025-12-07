@@ -43,18 +43,20 @@ fun OtpScreen(
     }
 
     OtpContent(
-        confirmOtpUiState = state.verifyOtpUiState,
+        verifyOtpUiState = state.verifyOtpUiState,
+        resendOtpUiState = state.resendOtpUiState,
         isTimerActive = state.isTimerActive,
-        timerValue = state.timerValue,
+        timerValueString = state.timerValueString,
         onIntent = viewModel::onIntent,
     )
 }
 
 @Composable
 private fun OtpContent(
-    confirmOtpUiState: UiState<*>,
+    verifyOtpUiState: UiState<*>,
+    resendOtpUiState: UiState<*>,
     isTimerActive: Boolean,
-    timerValue: String,
+    timerValueString: String,
     onIntent: (OtpIntent) -> Unit,
 ) {
     Column(Modifier.fillMaxSize()) {
@@ -67,12 +69,13 @@ private fun OtpContent(
                 onIntent(OtpIntent.OtpEnter(newValue))
             }
         )
-        if (isTimerActive) {
-            Text(timerValue)
+
+        if (isTimerActive && resendOtpUiState is UiState.Success) {
+            Text(timerValueString)
         } else {
             onIntent(OtpIntent.ResendOtp)
         }
-        when (confirmOtpUiState) {
+        when (verifyOtpUiState) {
             is UiState.Loading -> CircularProgressIndicator()
             else -> Button(
                 onClick = {
@@ -90,7 +93,7 @@ private fun OtpContent(
 private fun OtpContentPreview() {
     CashCoveTheme {
         OtpContent(
-            confirmOtpUiState = UiState.Idle,
+            verifyOtpUiState = UiState.Idle,
             isTimerActive = true,
             timerValue = "00:15",
             onIntent = {},

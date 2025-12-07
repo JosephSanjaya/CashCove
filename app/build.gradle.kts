@@ -33,9 +33,12 @@ android {
 }
 
 dependencies {
+    implementation(project(":features:auth:login"))
+    implementation(project(":features:auth:onboarding"))
+    implementation(project(":features:auth:register"))
+    implementation(project(":features:auth:otp"))
     coreLibraryDesugaring(libs.androidx.desugar)
     implementation(project(":core"))
-    implementation(project(":features:authentication"))
     implementation(libs.bundles.room)
     ksp(libs.room.compiler)
 }
