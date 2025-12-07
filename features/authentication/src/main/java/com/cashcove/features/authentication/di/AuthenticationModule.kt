@@ -13,38 +13,65 @@ import com.cashcove.features.authentication.presentation.otp.OtpViewModel
 import com.cashcove.features.authentication.presentation.register.RegisterState
 import com.cashcove.features.authentication.presentation.register.RegisterViewModel
 import de.jensklingenberg.ktorfit.Ktorfit
-import org.koin.core.module.dsl.viewModel
-import org.koin.dsl.module
+import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Module
+import org.koin.core.annotation.Single
 
-val AuthenticationModule = module {
-    single<AuthenticationService> {
-        // todo: fix deprecated `create` method
-        get<Ktorfit>().create()
+@Module
+object AuthenticationModule {
+
+    @Single
+    fun provideAuthenticationService(
+        ktorfit: Ktorfit
+    ): AuthenticationService {
+        return ktorfit.create<AuthenticationService>()
     }
 
-    single<AuthenticationRepository> {
-        AuthenticationRepositoryImpl(
-            authenticationService = get(),
-            dependencies = get()
+    @Single
+    fun provideAuthenticationRepository(
+        authenticationService: AuthenticationService,
+        dependencies: com.cashcove.core.di.RepositoryDependencies
+    ): AuthenticationRepository {
+        return AuthenticationRepositoryImpl(
+            authenticationService = authenticationService,
+            dependencies = dependencies
         )
     }
 
-    // login
-    factory { LoginUsecase(repository = get()) }
-    viewModel { LoginViewModel(loginUsecase = get()) }
+    @Factory
+    fun provideLoginUsecase(
+        repository: AuthenticationRepository
+    ): LoginUsecase {
+        return LoginUsecase(repository = repository)
+    }
 
-    viewModel {
-        RegisterViewModel(
+    @Factory
+    fun provideLoginViewModel(
+        loginUsecase: LoginUsecase
+    ): LoginViewModel {
+        return LoginViewModel(
+            initialState = LoginState(),
+            loginUsecase = loginUsecase
+        )
+    }
+
+    @Factory
+    fun provideRegisterViewModel(
+        repository: AuthenticationRepository
+    ): RegisterViewModel {
+        return RegisterViewModel(
             initialState = RegisterState(),
-            repository = get()
+            repository = repository
         )
     }
 
-    viewModel {
-        OnBoardingViewModel(OnBoardingState())
+    @Factory
+    fun provideOnBoardingViewModel(): OnBoardingViewModel {
+        return OnBoardingViewModel(OnBoardingState())
     }
 
-    viewModel {
-        OtpViewModel(OtpState())
+    @Factory
+    fun provideOtpViewModel(): OtpViewModel {
+        return OtpViewModel(OtpState())
     }
 }

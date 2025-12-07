@@ -18,13 +18,18 @@
         </compositeConfiguration>
         <option name="testRunner" value="CHOOSE_PER_TEST" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="21" />
+        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/auth" />
+            <option value="$PROJECT_DIR$/features/auth/login" />
+            <option value="$PROJECT_DIR$/features/auth/onboarding" />
+            <option value="$PROJECT_DIR$/features/auth/otp" />
+            <option value="$PROJECT_DIR$/features/auth/register" />
             <option value="$PROJECT_DIR$/features/authentication" />
             <option value="$PROJECT_DIR$/sjy-build-logic" />
             <option value="$PROJECT_DIR$/sjy-build-logic/convention" />

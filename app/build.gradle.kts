@@ -2,7 +2,6 @@ plugins {
     alias(sjy.plugins.buildlogic.app)
     alias(sjy.plugins.buildlogic.compose)
     alias(sjy.plugins.buildlogic.detekt)
-    alias(libs.plugins.ksp)
 }
 
 android {
