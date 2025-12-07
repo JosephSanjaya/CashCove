@@ -43,7 +43,7 @@ fun OtpScreen(
     }
 
     OtpContent(
-        confirmOtpUiState = state.confirmOtpUiState,
+        confirmOtpUiState = state.verifyOtpUiState,
         isTimerActive = state.isTimerActive,
         timerValue = state.timerValue,
         onIntent = viewModel::onIntent,

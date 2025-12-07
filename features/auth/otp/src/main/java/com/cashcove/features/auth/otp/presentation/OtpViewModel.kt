@@ -1,15 +1,23 @@
 package com.cashcove.features.auth.otp.presentation
 
 import androidx.lifecycle.viewModelScope
+import com.cashcove.core.common.model.UiState
+import com.cashcove.core.common.model.UsecaseBaseResult
+import com.cashcove.core.common.utils.extensions.toUiState
 import com.cashcove.core.viewmodel.BaseViewModel
 import com.cashcove.features.auth.otp.domain.usecase.ResendOtpUsecase
+import com.cashcove.features.auth.otp.domain.usecase.VerifyOtpUsecase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class OtpViewModel(initState: OtpState, private val resendOtpUsecase: ResendOtpUsecase) :
+class OtpViewModel(
+    initState: OtpState,
+    private val resendOtpUsecase: ResendOtpUsecase,
+    private val verifyOtpUsecase: VerifyOtpUsecase
+) :
     BaseViewModel<OtpState, OtpIntent, OtpSideEffect>(initState) {
 
-    private val MaxTimerSeconds = 60
+    private val maxTimerSeconds = 60
     fun onIntent(intent: OtpIntent) = reduce(intent)
     override fun reduce(intent: OtpIntent) {
         when (intent) {
@@ -18,30 +26,42 @@ class OtpViewModel(initState: OtpState, private val resendOtpUsecase: ResendOtpU
             OtpIntent.ToLogin -> postSideEffect(OtpSideEffect.NavigateToLogin)
             OtpIntent.ToRegister -> postSideEffect(OtpSideEffect.NavigateToRegister)
             OtpIntent.ResendOtp -> resendOtp()
-            is OtpIntent.OtpEnter -> {updateState { copy() }}
+            is OtpIntent.OtpEnter -> confirmOtp(intent.otp)
+        }
+    }
+
+    private fun confirmOtp(otp: String) {
+        viewModelScope.launch {
+            updateState { copy(verifyOtpUiState = UiState.Loading) }
+            verifyOtpUsecase(otp).collect {
+                updateState { copy(verifyOtpUiState = it.toUiState()) }
+            }
         }
     }
 
     private fun resendOtp() {
         viewModelScope.launch {
             resendOtpUsecase().collect {
-                runTimerFromTop()
+                updateState { copy(resendOtpUiState = it.toUiState()) }
+                if (it is UsecaseBaseResult.Success) {
+                    runTimerFromTop()
+                }
             }
         }
     }
 
-    private suspend fun runTimerFromTop(){
+    private suspend fun runTimerFromTop() {
         while (true) {
-            val diff = MaxTimerSeconds - state.value.timerValue
+            val diff = maxTimerSeconds - state.value.timerValue
             updateState {
                 copy(
                     timerValue = timerValue + 1,
                     timerValueString = "$diff"
                 )
             }
-            if (diff > MaxTimerSeconds)
+            if (diff > maxTimerSeconds)
                 break
-            delay(1000)
+            delay(1_000)
         }
     }
 }
