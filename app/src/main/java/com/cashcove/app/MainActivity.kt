@@ -9,7 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.cashcove.app.navigation.SplashNavGraph
+import com.cashcove.app.navigation.NavGraph
 import com.cashcove.core.ui.theme.CashCoveTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    SplashNavGraph(navController = navController)
+                    NavGraph(navController = navController)
                 }
             }
         }

@@ -18,7 +18,8 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
-    onNavigateToAuthentication: () -> Unit = {},
+    onNavigateToLogin: () -> Unit = {},
+    onNavigateToRegister: () -> Unit = {},
     onNavigateToMain: () -> Unit = {},
     viewModel: SplashViewModel = koinViewModel(),
 ) {
@@ -27,7 +28,7 @@ fun SplashScreen(
     LaunchedEffect(Unit) {
         viewModel.sideEffect.collect { sideEffect ->
             when (sideEffect) {
-                is SplashSideEffect.NavigateToAuthentication -> onNavigateToAuthentication()
+                is SplashSideEffect.NavigateToAuthentication -> onNavigateToLogin()
                 is SplashSideEffect.NavigateToMain -> onNavigateToMain()
             }
         }

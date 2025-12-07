@@ -17,7 +17,7 @@ class ResendOtpUsecase(
     private val repository: OtpRepository,
     private val userPreferencesManager: UserPreferencesManager,
 ) {
-    suspend operator fun invoke(otp:String): Flow<UsecaseBaseResult<OtpResult>> = flow {
+    suspend operator fun invoke(): Flow<UsecaseBaseResult<OtpResult>> = flow {
         emit(UsecaseBaseResult.Loading)
         val phoneNumber:String = userPreferencesManager.phoneNumberFlow.first()
         if (phoneNumber.isNotBlank()){
