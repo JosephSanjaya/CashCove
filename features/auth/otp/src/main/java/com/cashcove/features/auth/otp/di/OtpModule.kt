@@ -60,7 +60,14 @@ object OtpModule {
     }
 
     @Factory
-    fun provideOtpViewModel(): OtpViewModel {
-        return OtpViewModel(OtpState())
+    fun provideOtpViewModel(
+        verifyOtpUsecase: VerifyOtpUsecase,
+        resendOtpUsecase: ResendOtpUsecase
+    ): OtpViewModel {
+        return OtpViewModel(
+            initState = OtpState(),
+            resendOtpUsecase = resendOtpUsecase,
+            verifyOtpUsecase = verifyOtpUsecase,
+        )
     }
 }
