@@ -5,9 +5,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.cashcove.app.splash.SplashScreen
-import com.cashcove.features.authentication.presentation.login.LoginScreen
+import com.cashcove.features.auth.login.presentation.LoginScreen
 import com.cashcove.features.authentication.presentation.otp.OtpScreen
-import com.cashcove.features.authentication.presentation.register.RegisterScreen
 
 @Composable
 fun NavGraph(
@@ -48,7 +47,7 @@ fun NavGraph(
             )
         }
         composable(route = AppScreen.Register.route) {
-            RegisterScreen(
+            Register(
                 onNavigateToMain = {
                     navController.navigate(AppScreen.Main.route)
                 },

@@ -3,7 +3,7 @@ package com.cashcove.app
 import android.app.Application
 import com.cashcove.app.di.AppModule
 import com.cashcove.core.di.DiManager
-import com.cashcove.features.auth.login.di.LoginModule
+import com.cashcove.features.auth.register.di.RegisterModule
 import com.cashcove.features.auth.onboarding.di.OnboardingModule
 import com.cashcove.features.auth.otp.di.OtpModule
 import com.cashcove.features.authentication.di.AuthenticationModule
@@ -17,7 +17,7 @@ class CashCoveApp : Application() {
             listOf(
                 AppModule.module,
                 AuthenticationModule.module,
-                LoginModule.module,
+                RegisterModule.module,
                 OnboardingModule.module,
                 OtpModule.module,
             )
